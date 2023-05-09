@@ -194,6 +194,7 @@ app.post('/dieta',urlencodedParser ,(req, res) => {
     var produkt = req.body.produkt
     axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query='${produkt}'&pageSize=2&api_key=H2QQzAxDL6ucyhwobLT4q3W9hcH98w4hIPD9ZZQD`)
     .then(response => {
+        console.log(produkt);
         var wapn = response.data.foods[0].foodNutrients[0].value
         var zelazo = response.data.foods[0].foodNutrients[1].value
         var sol = response.data.foods[0].foodNutrients[2].value
@@ -215,7 +216,7 @@ app.post('/dieta',urlencodedParser ,(req, res) => {
         })
         con.query(`SELECT * FROM nutrients WHERE product = '${produkt}';`, function (err, result, fields) {
             res.send(`
-            <head>           <title>Traning Plan</title><meta charset="utf-8" /><meta name="viewport" content="initial-scale=1.0, width=device-width" /><link rel="stylesheet" href="style.css"></head><body><div class="header-container"><a href="../"><img class="buffed-icon" src="/icons/buffed_icon.svg"></a><img class="page-icon" src="/icons/diet_icon_dark.svg"></div><div class="training-container"><div class="text-container"><div class="training-plan">
+            <head>           <title>Wartości odżywcze</title><meta charset="utf-8" /><meta name="viewport" content="initial-scale=1.0, width=device-width" /><link rel="stylesheet" href="style.css"></head><body><div class="header-container"><a href="../"><img class="buffed-icon" src="/icons/buffed_icon.svg"></a><img class="page-icon" src="/icons/diet_icon_dark.svg"></div><div class="training-container"><div class="text-container"><div class="training-plan">
             <h2>Produkt: ${result[0].product}</h2>
             <p>Wapń: ${result[0].wapn}</p>
             <p>Żelazo: ${result[0].zelazo}</p>
@@ -232,13 +233,8 @@ app.post('/dieta',urlencodedParser ,(req, res) => {
             <p>Potas: ${result[0].potas}</p>
             <p>Kwasy tłuszczowe (trans): ${result[0].kt2}</p>
             <p>Lipidy: ${result[0].lip}</p>
-            
-            
-            
-            
-            
-            
             `)
+            
   
         })
 
