@@ -216,7 +216,7 @@ app.post('/dieta',urlencodedParser ,(req, res) => {
         })
         con.query(`SELECT * FROM nutrients WHERE product = '${produkt}';`, function (err, result, fields) {
             res.send(`
-            <head>           <title>Dieta/title><meta charset="utf-8" /><meta name="viewport" content="initial-scale=1.0, width=device-width" /><link rel="stylesheet" href="style.css"></head><body><div class="header-container"><a href="../"><img class="buffed-icon" src="/icons/buffed_icon.svg"></a><img class="page-icon" src="/icons/diet_icon_dark.svg"></div><div class="training-container"><div class="text-container"><div class="training-plan">
+            <head>           <title>Dieta</title><meta charset="utf-8" /><meta name="viewport" content="initial-scale=1.0, width=device-width" /><link rel="stylesheet" href="style.css"></head><body><div class="header-container"><a href="../"><img class="buffed-icon" src="/icons/buffed_icon.svg"></a><img class="page-icon" src="/icons/diet_icon_dark.svg"></div><div class="training-container"><div class="text-container"><div class="training-plan">
             <h2>Produkt: ${result[0].product}</h2>
             <p>Wapń: ${result[0].wapn}</p>
             <p>Żelazo: ${result[0].zelazo}</p>
