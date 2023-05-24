@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const mysql = require('mysql')
+const mysql = require('mysql2')
 const bodyParser = require("body-parser")
 const bcrypt = require("bcrypt")
 const fetch = require("node-fetch")
@@ -15,12 +15,15 @@ app.use(cookieParser())
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 var con = mysql.createConnection({
-    host: "containers-us-west-155.railway.app",
-    user: "root",
-    password: "TMErmIgdM9FJz3OxR8yh",
+    host:"containers-us-west-14.railway.app",
+    //host: "containers-us-west-155.railway.app",
+    user:"root",
+    password:"oZEVrFzsb0V5WYQsg2V0",
+    //password: "TMErmIgdM9FJz3OxR8yh",
     //password: "6Ld3S1lwE0F6OhC0wOcw",
     database: "railway",
-    port: 7792
+    port:"6941"
+    //port: 7792
   });
 
   con.connect(function(err) {
@@ -216,23 +219,23 @@ app.post('/dieta',urlencodedParser ,(req, res) => {
         })
         con.query(`SELECT * FROM nutrients WHERE product = '${produkt}';`, function (err, result, fields) {
             res.send(`
-            <head>           <title>Dieta</title><meta charset="utf-8" /><meta name="viewport" content="initial-scale=1.0, width=device-width" /><link rel="stylesheet" href="style.css"></head><body><div class="header-container"><a href="../"><img class="buffed-icon" src="/icons/buffed_icon.svg"></a><img class="page-icon" src="/icons/diet_icon_dark.svg"></div><div class="training-container"><div class="text-container"><div class="training-plan">
-            <h2>Produkt: ${result[0].product}</h2>
-            <p>Wapń: ${result[0].wapn}</p>
-            <p>Żelazo: ${result[0].zelazo}</p>
-            <p>Sól: ${result[0].sol}</p>
-            <p>Witamina A: ${result[0].a}</p>
-            <p>Witamina C: ${result[0].c}</p>
-            <p>Cholesterol: ${result[0].ch}</p>
-            <p>Kwasy tłuszczowe: ${result[0].kt}</p>
-            <p>Proteiny: ${result[0].p}</p>
-            <p>Węglowodany: ${result[0].w}</p>
-            <p>Kcal: ${result[0].kcal}</p>
-            <p>Cuk: ${result[0].cuk}</p>
-            <p>Błonnik: ${result[0].b}</p>
-            <p>Potas: ${result[0].potas}</p>
-            <p>Kwasy tłuszczowe (trans): ${result[0].kt2}</p>
-            <p>Lipidy: ${result[0].lip}</p>
+            <head><title>Dieta</title><meta charset="utf-8" /><meta name="viewport" content="initial-scale=1.0, width=device-width" /><link rel="stylesheet" href="style.css"></head><body><div class="header-container"><a href="../"><img class="buffed-icon" src="/icons/buffed_icon.svg"></a><img class="page-icon" src="/icons/diet_icon_dark.svg"></div><div class="training-container"><div class="text-container"><div class="training-plan">
+            <h2>Produkt: ${produkt}</h2>
+            <p>Wapń: ${wapn}</p>
+            <p>Żelazo: ${zelazo}</p>
+            <p>Sól: ${sol}</p>
+            <p>Witamina A: ${a}</p>
+            <p>Witamina C: ${c}</p>
+            <p>Cholesterol: ${cholesterol}</p>
+            <p>Kwasy tłuszczowe: ${kt}</p>
+            <p>Proteiny: ${proteiny}</p>
+            <p>Węglowodany: ${weglowodany}</p>
+            <p>Kcal: ${kcal}</p>
+            <p>Cuk: ${cukry}</p>
+            <p>Błonnik: ${błonnik}</p>
+            <p>Potas: ${potas}</p>
+            <p>Kwasy tłuszczowe (trans): ${kt2}</p>
+            <p>Lipidy: ${lip}</p>
             `)
             
   
@@ -411,3 +414,7 @@ app.listen(port, () => {
 
 
 app.use(express.static(__dirname + '/public'));
+
+
+
+
